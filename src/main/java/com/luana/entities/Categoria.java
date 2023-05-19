@@ -1,4 +1,4 @@
-package com.luana.domain;
+package com.luana.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

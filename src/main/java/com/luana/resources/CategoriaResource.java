@@ -1,9 +1,10 @@
 package com.luana.resources;
 
-import com.luana.domain.Categoria;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.luana.entities.Categoria;
+import com.luana.services.CategoriaService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +13,14 @@ import java.util.List;
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<Categoria> listar(){
+    @Autowired
+    private CategoriaService categoriaService;
+   // @RequestMapping(value="/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<?> find (@PathVariable Integer id){
+        Categoria obj = categoriaService.findById(id);
+            return ResponseEntity.ok().body(obj);
 
-        Categoria cat1 = new Categoria(1, "informatica");
-        Categoria cat2 = new Categoria(2, "escritorio");
-        List<Categoria> list = new ArrayList<>();
-        list.add(cat1);
-        list.add(cat2);
-        return list;
+
     }
 }
