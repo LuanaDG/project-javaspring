@@ -5,7 +5,7 @@ Aplicação backend.
 
 
 ## Tecnologias utilizadas
-- Java
+- Java 17
 - Spring Boot
 - JPA / Hibernate
 - Maven
@@ -14,8 +14,6 @@ Aplicação backend.
 
 ![diagrama-de-classes.png](readmefiles/diagrama-de-classes.png)
 
-
-![diagrama-de-objetos.png](..%2Fdiagrama-de-objetos.png)
 
 
 ## EndPoints disponibilizados
