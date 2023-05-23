@@ -1,5 +1,6 @@
 package com.luana.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.luana.entities.enums.TipoCliente;
 import jakarta.persistence.*;
 
@@ -16,6 +17,7 @@ public class Cliente {
     private String cpfOuCnpj;
     private Integer tipo;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
