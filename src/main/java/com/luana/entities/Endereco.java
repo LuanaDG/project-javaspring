@@ -1,7 +1,6 @@
 package com.luana.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.luana.entities.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -19,7 +18,7 @@ public class Endereco {
     private String cep;
 
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;

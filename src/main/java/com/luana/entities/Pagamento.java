@@ -1,5 +1,6 @@
 package com.luana.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luana.entities.enums.EstadoPagamento;
 import jakarta.persistence.*;
 
@@ -13,7 +14,7 @@ public abstract class Pagamento implements Serializable {
     @Id
     private Integer id;
     private Integer estado;
-
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
