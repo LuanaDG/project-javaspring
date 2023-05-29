@@ -2,12 +2,15 @@ package com.luana.services;
 
 import com.luana.entities.Categoria;
 import com.luana.repositories.CategoriaRepository;
+import com.luana.services.exceptions.DataIntegrityException;
 import com.luana.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,5 +33,17 @@ public class CategoriaService {
     public Categoria update(Categoria obj){
         findById(obj.getId());
         return categoriaRepository.save(obj);
+    }
+    public void delete(Integer id){
+        findById(id);
+        try {
+            categoriaRepository.deleteById(id);
+        }
+        catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos!");
+        }
+    }
+    public List<Categoria> findAll(){
+        return categoriaRepository.findAll();
     }
 }
