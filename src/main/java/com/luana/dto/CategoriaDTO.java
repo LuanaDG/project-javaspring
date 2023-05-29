@@ -1,11 +1,16 @@
 package com.luana.dto;
 
 import com.luana.entities.Categoria;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
 
 import java.io.Serializable;
 
 public class CategoriaDTO implements Serializable {
     private Integer id;
+    @NotEmpty(message = "Preenchimento obrigatório")
+    @Size(min=5, max=80, message="O tamanho deve ser entre 5 e 80 caracteres")
     private String nome;
 
     public CategoriaDTO() {

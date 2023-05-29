@@ -1,5 +1,6 @@
 package com.luana.services;
 
+import com.luana.dto.CategoriaDTO;
 import com.luana.entities.Categoria;
 import com.luana.repositories.CategoriaRepository;
 import com.luana.services.exceptions.DataIntegrityException;
@@ -52,5 +53,8 @@ public class CategoriaService {
     public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page,linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return categoriaRepository.findAll(pageRequest);
+    }
+    public Categoria fromDTO(CategoriaDTO objDto){
+        return new Categoria(objDto.getId(), objDto.getNome());
     }
 }

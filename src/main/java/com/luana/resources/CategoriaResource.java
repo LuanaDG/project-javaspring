@@ -3,6 +3,7 @@ package com.luana.resources;
 import com.luana.dto.CategoriaDTO;
 import com.luana.entities.Categoria;
 import com.luana.services.CategoriaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,8 @@ public class CategoriaResource {
             return ResponseEntity.ok().body(obj);
     }
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody Categoria obj){
+    public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto){
+        Categoria obj = categoriaService.fromDTO(objDto);
         obj = categoriaService.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -36,7 +38,8 @@ public class CategoriaResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id){
+    public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id){
+        Categoria obj = categoriaService.fromDTO(objDto);
         obj.setId(id);
         obj = categoriaService.update(obj);
         return ResponseEntity.noContent().build();
