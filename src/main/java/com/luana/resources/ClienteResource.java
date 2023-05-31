@@ -1,8 +1,7 @@
 package com.luana.resources;
 
-import com.luana.dto.CategoriaDTO;
 import com.luana.dto.ClienteDTO;
-import com.luana.entities.Categoria;
+import com.luana.dto.ClienteNewDTO;
 import com.luana.entities.Cliente;
 import com.luana.services.ClienteService;
 import jakarta.validation.Valid;
@@ -26,6 +25,14 @@ public class ClienteResource {
     public ResponseEntity<Cliente> find (@PathVariable Integer id){
         Cliente obj = clienteService.findById(id);
             return ResponseEntity.ok().body(obj);
+    }
+    @PostMapping
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto){
+        Cliente obj = clienteService.fromDTO(objDto);
+        obj = clienteService.insert(obj);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(obj.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id){
