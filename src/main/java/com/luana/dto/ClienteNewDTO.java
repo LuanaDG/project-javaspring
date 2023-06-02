@@ -1,11 +1,13 @@
 package com.luana.dto;
 
+import com.luana.services.validation.ClienteInsert;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
     @NotEmpty(message="Preenchimento obrigatório")
     @Size(min=5, max=120, message="O tamanho deve ser entre 5 e 120 caracteres")
@@ -16,6 +18,7 @@ public class ClienteNewDTO implements Serializable {
     private String email;
 
     @NotEmpty(message="Preenchimento obrigatório")
+
     private String cpfOuCnpj;
 
     private Integer tipo;
